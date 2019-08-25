@@ -5,8 +5,6 @@ import App from './Containers/JS/App';
 import * as serviceWorker from './serviceWorker';
 import 'tachyons';
 
-
-console.log("url is", process.env.PUBLIC_URL);
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
