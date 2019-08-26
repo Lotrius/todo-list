@@ -28,8 +28,12 @@ class AddItem extends Component {
 
     submitItem = (event) => {
         event.preventDefault(); // Prevent page from refreshing whenever submit is clicked
-        console.log(this.refs.input.value);
-        return this.props.updateTodo(this.refs.input.value);
+
+        const item = this.refs.input.value; // Get whatever the user typed
+
+        this.refs.input.value = ''; // Reset text field value
+
+        return this.props.updateTodo(item); // Call updateTodo
     }
 }
 

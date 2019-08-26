@@ -35,6 +35,8 @@ class App extends Component {
         <ItemList
           todos={this.state.todos}
           toggleComplete={this.toggleComplete}
+          removeItem={this.removeItem}
+          editItem={this.editItem}
         />
       </div>
     );
@@ -55,11 +57,20 @@ class App extends Component {
       completed: false
     });
 
-    console.log(todos);
-
     this.setState({ todos });
   }
 
+  removeItem = (index) => {
+    todos.splice(index, 1);
+    this.setState({ todos });
+  }
+
+  editItem = (index, text) => {
+    const foundTodo = this.state.todos[index];
+
+    foundTodo.task = text;
+    this.setState({ todos });
+  }
 }
 
 export default App;
