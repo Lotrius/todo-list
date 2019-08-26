@@ -12,10 +12,12 @@ class Item extends Component {
         const { todo, ind } = this.props;
         const { editing } = this.state;
 
+        console.log(todo.completed);
+
         // If editing,
         return editing ?
             // Render with edit button
-            <div className="bg-light-blue mw6 center pa2 mt3 br2-ns ba b--black-10" >
+            <div className={"mw6 center pa2 mt3 br2-ns ba b--black-10 " + (todo.completed ? 'bg-light-green' : 'bg-light-blue')}>
                 {this.printListItem(todo, ind)}
                 {this.removeButton(ind)}
                 {this.editOrSaveButton(ind)}
@@ -23,7 +25,7 @@ class Item extends Component {
             :
 
             // Otherwise render with save button
-            <div className="bg-light-blue mw6 center pa2 mt3 br2-ns ba b--black-10" >
+            <div className={"mw6 center pa2 mt3 br2-ns ba b--black-10 " + (todo.completed ? 'bg-light-green' : 'bg-light-blue')} >
                 {this.printListItem(todo, ind)}
                 {this.removeButton(ind)}
                 {this.editOrSaveButton(ind)}
@@ -37,7 +39,7 @@ class Item extends Component {
         // Also pointers
         // Also strikethrough for completed items
         const taskStyle = {
-            color: item.completed ? '#d9534f': '#5cb85c',
+            color: item.completed ? '#137752': 'black',
             cursor: 'pointer',
             textDecoration: item.completed ? 'line-through' : 'none'
         }
