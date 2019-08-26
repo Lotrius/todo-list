@@ -69,6 +69,8 @@ class App extends Component {
     const foundTodo = this.state.todos[index];
 
     foundTodo.task = text;
+    foundTodo.completed = false;
+    
     this.setState({ todos });
   }
 }

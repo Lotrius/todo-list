@@ -10,26 +10,22 @@ class Item extends Component {
 
     render() {
         const { todo, ind } = this.props;
-        const { editing } = this.state;
-
-        console.log(todo.completed);
 
         // If editing,
-        return editing ?
+        return (
             // Render with edit button
-            <div className={"mw6 center pa2 mt3 br2-ns ba b--black-10 " + (todo.completed ? 'bg-light-green' : 'bg-light-blue')}>
-                {this.printListItem(todo, ind)}
-                {this.removeButton(ind)}
-                {this.editOrSaveButton(ind)}
-            </div>
-            :
+            <div className={"mw6 center pa2 mt3 br2-ns ba b--black-10 overflow-auto " + (todo.completed ? 'bg-light-green' : 'bg-light-blue')} >
+                <div className='dib fl'>
+                    {this.printListItem(todo, ind)}
+                </div>
 
-            // Otherwise render with save button
-            <div className={"mw6 center pa2 mt3 br2-ns ba b--black-10 " + (todo.completed ? 'bg-light-green' : 'bg-light-blue')} >
-                {this.printListItem(todo, ind)}
-                {this.removeButton(ind)}
-                {this.editOrSaveButton(ind)}
+                <div className='fr pr2'>
+                    {this.editOrSaveButton(ind)}
+                    {this.removeOrCancelButton(ind)}
+                </div>
+
             </div>
+        );
 
     }
 
@@ -39,7 +35,7 @@ class Item extends Component {
         // Also pointers
         // Also strikethrough for completed items
         const taskStyle = {
-            color: item.completed ? '#137752': 'black',
+            color: item.completed ? '#137752' : 'black',
             cursor: 'pointer',
             textDecoration: item.completed ? 'line-through' : 'none'
         }
@@ -56,35 +52,35 @@ class Item extends Component {
     }
 
     // The removal button
-    removeButton = (index) => {
-        return (
+    removeOrCancelButton = (index) => {
+        return this.state.editing ?
+            <button type="button" onClick={() => this.setState({ editing: false })}>Cancel</button>
+            :
             <button type="button" onClick={this.props.removeItem.bind(this, index)}>X</button>
-        );
+
     }
 
     // The edit/save button
     editOrSaveButton = (index) => {
-        const button = (
+        // If editing,
+        return this.state.editing ?
 
-            // If editing,
-            this.state.editing ?
-
-                // Render save button
+            // Render save button
+            <div className='pr2 dib'>
                 <button type="button" onClick={this.saveEdit.bind(this, index)}>Save</button>
-                :
-
-                // Otherwise render edit button
+            </div>
+            :
+            // Otherwise render edit button
+            <div className='pr2 dib'>
                 <button type="button" onClick={this.changeEditValue}>Edit</button>
-        )
+            </div>
 
-        return button;
 
     }
 
     // Edit button was clicked
     changeEditValue = () => {
         const newEditState = !this.state.editing; // Cause react gets upset when I try to skip this step
-
         this.setState({ editing: newEditState });
     }
 
