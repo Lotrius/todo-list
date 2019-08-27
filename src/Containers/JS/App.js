@@ -28,17 +28,22 @@ class App extends Component {
       <div>
         <Title />
 
-        <AddItem
-          updateTodo={this.updateTodo}
-        />
+        <div className='bg-light-gray mw7 center pa4 mt5 br2-ns ba b--black-10'>
+          <AddItem
+            updateTodo={this.updateTodo}
+          />
 
-        <ItemList
-          todos={this.state.todos}
-          toggleComplete={this.toggleComplete}
-          removeItem={this.removeItem}
-          editItem={this.editItem}
-        />
+          <hr className='mt4 mb3'/>
+
+          <ItemList
+            todos={this.state.todos}
+            toggleComplete={this.toggleComplete}
+            removeItem={this.removeItem}
+            editItem={this.editItem}
+          />
+        </div>
       </div>
+
     );
   }
 
@@ -70,7 +75,7 @@ class App extends Component {
 
     foundTodo.task = text;
     foundTodo.completed = false;
-    
+
     this.setState({ todos });
   }
 }

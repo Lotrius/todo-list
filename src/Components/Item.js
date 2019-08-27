@@ -26,7 +26,12 @@ class Item extends Component {
 
             </div>
         );
+    }
 
+    componentDidUpdate() {
+        if (this.state.editing) {
+            this.refs.editedtext.focus();
+        }
     }
 
     // Prints the list items in the todo list
@@ -44,7 +49,9 @@ class Item extends Component {
         // Return the item as a label
         // Why a label? idk man
         return this.state.editing ?
-            <input type='text' ref='editedtext' defaultValue={item.task} />
+            <form onSubmit={this.saveEdit.bind(this, index)}>
+                <input type='text' ref='editedtext' defaultValue={item.task} />
+            </form>
             :
             <label style={taskStyle} onClick={this.props.toggleComplete.bind(this, index)}>
                 {item.task}
@@ -85,7 +92,9 @@ class Item extends Component {
     }
 
     // Save edited item
-    saveEdit = (index) => {
+    // Index needs to come first otherwise react gets upset
+    saveEdit = (index, event) => {
+        event.preventDefault();
         this.props.editItem(index, this.refs.editedtext.value); // Call editItem in App
         this.changeEditValue(); // Undo editing value
     }

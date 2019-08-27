@@ -20,11 +20,11 @@ class ItemList extends Component {
 
     render() {
         return (
-            <form className='bg-light-gray mw7 center pa4 br2-ns ba b--black-10' >
+            <div >
                 <div className='cf'>
                     {this.printItems()}
                 </div>
-            </form>
+            </div>
         );
     }
 

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class AddItem extends Component {
     render() {
         return (
-            <form className='bg-light-gray mw7 center pa4 mt5 br2-ns ba b--black-10' onSubmit={this.submitItem}>
+            <form onSubmit={this.submitItem}>
                 <div className='cf'>
                     <div>
                         <input
@@ -29,11 +29,16 @@ class AddItem extends Component {
     submitItem = (event) => {
         event.preventDefault(); // Prevent page from refreshing whenever submit is clicked
 
-        const item = this.refs.input.value; // Get whatever the user typed
+        const item = this.refs.input.value.trim(); // Get whatever the user typed
 
-        this.refs.input.value = ''; // Reset text field value
+        if (item === '') {
+            this.refs.input.value = '';
+            return;
+        } else {
+            this.refs.input.value = ''; // Reset text field value
 
-        return this.props.updateTodo(item); // Call updateTodo
+            return this.props.updateTodo(item); // Call updateTodo
+        }
     }
 }
 
