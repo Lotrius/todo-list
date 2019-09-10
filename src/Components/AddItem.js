@@ -32,6 +32,7 @@ class AddItem extends Component {
         const item = this.refs.input.value.trim(); // Get whatever the user typed
 
         if (item === '') {
+            // If there's nothing don't let an item be added
             this.refs.input.value = '';
             return;
         } else {
